@@ -54,16 +54,17 @@ class ExcelOps(object):
 
     # 在表格里更新煤种的价格
     def updateParamTable(self, itemSelected, priceInput, beginDate, endDate):
+        if beginDate > endDate :
+            return False
         startDateIndex = self.findIndexOfDate(beginDate)
         endDateIndex = self.findIndexOfDate(endDate)
-        # if string.(startDateIndex, endDateIndex) > 0:
-        #     return
         kindIndex = self.findIndexOfKind(itemSelected)
         oldBook = xlrd.open_workbook('参数表.xls')
         newBook = copy(oldBook)
         for index in range(startDateIndex, endDateIndex + 1):
             newBook.get_sheet(0).write(index, kindIndex, priceInput)
         newBook.save('参数表.xls')
+        return True
 
     def findIndexOfDate(self, date):
         sheet = xlrd.open_workbook('参数表.xls').sheets()[0]
@@ -78,3 +79,8 @@ class ExcelOps(object):
             cell_value = sheet.cell_value(0, column)
             if cell_value == str(itemSelected + '\n'):
                 return column
+
+    def compareStr(self, str1, str2):
+        print(str1 < str2)
+
+
