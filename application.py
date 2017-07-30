@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from app import Ui_MainWindow
 
 __author__ = 'leexuehan@github.com'
 
@@ -9,7 +10,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 
 from excelOps import ExcelOps
 
-from myUi import *
 
 
 class MyWindow(QMainWindow):
@@ -33,10 +33,9 @@ class MyWindow(QMainWindow):
         self.sorts = []
         self.init_item_list()
 
-
     def init_item_list(self):
         self.ui.comboBox.clear()
-        with open('煤种列表.txt', 'r') as file:
+        with open('sortlist.txt', 'r', encoding='utf-8') as file:
             for line in file:
                 self.sorts.append(line.strip())
             self.ui.comboBox.addItems(self.sorts)
@@ -95,6 +94,13 @@ class MyWindow(QMainWindow):
             return False
         else:
             return True
+
+    def invokeHelp(self):
+        QMessageBox.information(self, 'invoke help', '帮助内容', QMessageBox.Yes)
+
+    def invokeEdit(self):
+        print('invoke edit')
+        QMessageBox.information(self, 'invoke help', 'jj', QMessageBox.Yes)
 
     def exit(self):
         sys.exit(0)
