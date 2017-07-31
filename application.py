@@ -11,7 +11,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 from excelOps import ExcelOps
 
 
-
 class MyWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent)
@@ -27,24 +26,25 @@ class MyWindow(QMainWindow):
         self.beginDate = None
         self.endDate = None
         self.price = None
-        self.itemSelected = None
+        self.coalSortsSelected = None
 
         # init comboBox
         self.sorts = []
         self.init_item_list()
 
     def init_item_list(self):
-        self.ui.comboBox.clear()
+        self.ui.coalSorts.clear()
         with open('sortlist.txt', 'r', encoding='utf-8') as file:
             for line in file:
                 self.sorts.append(line.strip())
-            self.ui.comboBox.addItems(self.sorts)
-        self.itemSelected = self.sorts[0]
+            self.ui.coalSorts.addItems(self.sorts)
+        self.coalSortsSelected = self.sorts[0]
 
-    def itemlistSelected(self, item):
+    def onCoalSortSelected(self, item):
         # 获得条目
-        print(self.sorts[item])
-        self.itemSelected = self.sorts[item]
+        coalSorts = self.sorts[item]
+        print(coalSorts)
+        self.coalSortsSelected = coalSorts
 
     def getPrice(self):
         # 获得单价
@@ -55,7 +55,8 @@ class MyWindow(QMainWindow):
         # 导出每一次添加
         with open('添加备份.txt', 'a') as file:
             addtime = time.strftime('%Y-%m-%d-%H:%M', time.localtime(time.time()))
-            content = str(self.beginDate) + '~' + str(self.endDate) + ',' + self.itemSelected + ',' + self.price + '\n'
+            content = str(self.beginDate) + '~' + str(
+                self.endDate) + ',' + self.coalSortsSelected + ',' + self.price + '\n'
             file.write(str(addtime) + '添加了:' + content)
 
     def onAddFinished(self):
@@ -63,7 +64,7 @@ class MyWindow(QMainWindow):
         if not self.verifyInput():
             return
         # 一次添加完成
-        if not self.excelOps.update_param_table(self.itemSelected, self.price, self.beginDate, self.endDate):
+        if not self.excelOps.update_param_table(self.coalSortsSelected, self.price, self.beginDate, self.endDate):
             QMessageBox.information(self, 'date select', '起始日期不能大于截止日期', QMessageBox.Yes)
             return
         # 导出此次添加到备份文件
@@ -80,7 +81,7 @@ class MyWindow(QMainWindow):
         self.endDate = str(self.ui.endCalender.selectedDate().toPyDate())
 
     def verifyInput(self):
-        if self.itemSelected == None:
+        if self.coalSortsSelected == None:
             QMessageBox.information(self, 'add finished', '没有选择种类', QMessageBox.Yes)
             return False
         elif self.beginDate == None:
