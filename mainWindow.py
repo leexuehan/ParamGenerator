@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 from app import Ui_MainWindow
+from ticketDialog import TicketDialog
 
 __author__ = 'leexuehan@github.com'
 
 import sys
 import time
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 from excelOps import ExcelOps
 
 
-class MyWindow(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self, parent=None):
-        super(MyWindow, self).__init__(parent)
+        super(MainWindow, self).__init__(parent)
         # init param table
         self.excelOps = ExcelOps()
         self.excelOps.generate_param_table()
@@ -44,7 +45,10 @@ class MyWindow(QMainWindow):
         # 获得条目
         coalSorts = self.sorts[item]
         print(coalSorts)
-        self.coalSortsSelected = coalSorts
+        if coalSorts == '添加煤种':
+            print("开始添加新煤种.....")
+        else:
+            self.coalSortsSelected = coalSorts
 
     def getPrice(self):
         # 获得单价
@@ -103,12 +107,17 @@ class MyWindow(QMainWindow):
         print('invoke edit')
         QMessageBox.information(self, 'invoke help', 'jj', QMessageBox.Yes)
 
+    def manage_ticket(self):
+        ticketDialog = TicketDialog()
+        ticketDialog.show()
+        ticketDialog.exec_()
+
     def exit(self):
         sys.exit(0)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    mainWindow = MyWindow()
+    mainWindow = MainWindow()
     mainWindow.show()
     sys.exit(app.exec_())

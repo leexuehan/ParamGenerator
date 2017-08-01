@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>834</width>
+    <height>595</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="exit">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>420</y>
+      <x>420</x>
+      <y>330</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -32,7 +32,7 @@
      <rect>
       <x>80</x>
       <y>280</y>
-      <width>61</width>
+      <width>131</width>
       <height>21</height>
      </rect>
     </property>
@@ -82,8 +82,8 @@
    <widget class="QPushButton" name="finishButton">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>380</y>
+      <x>200</x>
+      <y>390</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -95,8 +95,8 @@
    <widget class="QTextEdit" name="priceInput">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>420</y>
+      <x>80</x>
+      <y>310</y>
       <width>104</width>
       <height>21</height>
      </rect>
@@ -105,8 +105,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>420</y>
+      <x>30</x>
+      <y>310</y>
       <width>59</width>
       <height>16</height>
      </rect>
@@ -187,26 +187,13 @@
      <string>吨位</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>280</y>
-      <width>221</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>下拉列表中无此煤种类，点击添加煤种</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>834</width>
      <height>23</height>
     </rect>
    </property>
@@ -228,17 +215,31 @@
     <property name="title">
      <string>煤种</string>
     </property>
-    <addaction name="actionmeizhong"/>
+    <widget class="QMenu" name="menuff">
+     <property name="title">
+      <string>ff</string>
+     </property>
+     <addaction name="actionff_2"/>
+    </widget>
+    <addaction name="menuff"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>票种管理</string>
+     <string>票种</string>
+    </property>
+    <addaction name="manage_ticket"/>
+    <addaction name="query_ticket_info"/>
+   </widget>
+   <widget class="QMenu" name="menuother">
+    <property name="title">
+     <string>other</string>
     </property>
    </widget>
    <addaction name="menuEdit"/>
    <addaction name="menuhelp"/>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
+   <addaction name="menuother"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -278,6 +279,27 @@
     <string>meizhong</string>
    </property>
   </action>
+  <action name="actionff_2">
+   <property name="text">
+    <string>ff</string>
+   </property>
+  </action>
+  <action name="manage_ticket">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>管理票种</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="query_ticket_info">
+   <property name="text">
+    <string>查询票种</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -304,8 +326,8 @@
    <slot>exit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>462</y>
+     <x>493</x>
+     <y>385</y>
     </hint>
     <hint type="destinationlabel">
      <x>655</x>
@@ -352,8 +374,8 @@
    <slot>getPrice()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>358</x>
-     <y>463</y>
+     <x>178</x>
+     <y>353</y>
     </hint>
     <hint type="destinationlabel">
      <x>400</x>
@@ -368,12 +390,28 @@
    <slot>onAddFinished()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>616</x>
-     <y>418</y>
+     <x>236</x>
+     <y>445</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
      <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>manage_ticket</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>manage_ticket()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>462</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>539</y>
     </hint>
    </hints>
   </connection>
@@ -391,6 +429,6 @@
   <slot>slot1()</slot>
   <slot>invokeHelp()</slot>
   <slot>invokeEdit()</slot>
-  <slot>slot2()</slot>
+  <slot>manage_ticket()</slot>
  </slots>
 </ui>
