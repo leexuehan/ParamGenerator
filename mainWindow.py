@@ -58,8 +58,7 @@ class MainWindow(QMainWindow):
 
     def getPrice(self):
         # 获得单价
-        print(self.ui.priceInput.toPlainText())
-        self.price = self.ui.priceInput.toPlainText()
+        pass
 
     def exportTable(self, beginDate, endDate, price):
         # 导出每一次添加
