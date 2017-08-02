@@ -30,25 +30,31 @@ class MainWindow(QMainWindow):
         self.coalSortsSelected = None
 
         # init comboBox
-        self.sorts = []
-        self.init_item_list()
+        self.coal_sorts = []
+        self.load_coal_sorts()
+        self.ticket_sorts = []
+        self.load_ticket_sorts()
 
-    def init_item_list(self):
-        self.ui.coalSorts.clear()
+
+    def load_coal_sorts(self):
+        self.ui.coal_sorts.clear()
         with open('sortlist.txt', 'r', encoding='utf-8') as file:
             for line in file:
-                self.sorts.append(line.strip())
-            self.ui.coalSorts.addItems(self.sorts)
-        self.coalSortsSelected = self.sorts[0]
+                self.coal_sorts.append(line.strip())
+            self.ui.coal_sorts.addItems(self.coal_sorts)
+        self.coalSortsSelected = self.coal_sorts[0]
+
+    def load_ticket_sorts(self):
+        self.ui.ticket_sorts.clear()
+        with open('ticketlist.txt', 'r', encoding='utf-8') as file:
+            for line in file:
+                self.ticket_sorts.append(line.strip())
+            self.ui.ticket_sorts.addItems(self.ticket_sorts)
 
     def onCoalSortSelected(self, item):
         # 获得条目
-        coalSorts = self.sorts[item]
-        print(coalSorts)
-        if coalSorts == '添加煤种':
-            print("开始添加新煤种.....")
-        else:
-            self.coalSortsSelected = coalSorts
+        coalSorts = self.coal_sorts[item]
+        self.coalSortsSelected = coalSorts
 
     def getPrice(self):
         # 获得单价
