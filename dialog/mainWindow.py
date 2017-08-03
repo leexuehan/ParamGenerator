@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from app import Ui_MainWindow
-from ticketDialog import TicketDialog
+from dialog.calendarDialog import CalendarDialog
+from dialog.ticketDialog import TicketDialog
+from ui.app import Ui_MainWindow
 
 __author__ = 'leexuehan@github.com'
 
@@ -9,7 +10,7 @@ import time
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 
-from excelOps import ExcelOps
+from utils.excelOps import ExcelOps
 
 
 class MainWindow(QMainWindow):
@@ -34,7 +35,6 @@ class MainWindow(QMainWindow):
         self.load_coal_sorts()
         self.ticket_sorts = []
         self.load_ticket_sorts()
-
 
     def load_coal_sorts(self):
         self.ui.coal_sorts.clear()
@@ -70,15 +70,6 @@ class MainWindow(QMainWindow):
 
     def onAddFinished(self):
         # 校验输入是否完整
-        if not self.verifyInput():
-            return
-        # 一次添加完成
-        if not self.excelOps.update_param_table(self.coalSortsSelected, self.price, self.beginDate, self.endDate):
-            QMessageBox.information(self, 'date select', '起始日期不能大于截止日期', QMessageBox.Yes)
-            return
-        # 导出此次添加到备份文件
-        self.exportTable(self.beginDate, self.endDate, self.price)
-        # 弹出成功消息框
         QMessageBox.information(self, 'add finished', '添加成功!此次添加的内容已经导出到本地备份文件中', QMessageBox.Yes)
 
     def beginDate(self):
@@ -116,6 +107,25 @@ class MainWindow(QMainWindow):
         ticketDialog = TicketDialog()
         ticketDialog.show()
         ticketDialog.exec_()
+
+    def on_date_selected(self):
+        calendarDialog = CalendarDialog()
+        calendarDialog.show()
+        if calendarDialog.exec_():
+            date = calendarDialog.date_time
+            print("value get from calendar window is:" + date.strftime('%Y/%m/%d'))
+            self.ui.date_value_display.setPlainText(date.strftime('%Y/%m/%d'))
+        calendarDialog.destroy()
+
+    def on_name_input(self):
+        print("input name is", self.ui.usernmae_content.text())
+
+    def on_input_car_id(self):
+        print("input car id is", self.ui.car_id_content.text())
+
+    def on_weight_value_input(self):
+        print("input weight value is", self.ui.weight_value.text())
+        print("input weight value2 is", self.ui.weight_value_2.text())
 
     def exit(self):
         sys.exit(0)

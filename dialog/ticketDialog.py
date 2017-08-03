@@ -2,7 +2,7 @@
 
 from PyQt5.QtWidgets import QDialog
 
-from ticket import Ui_Ticket_Dialog
+from ui.ticket import Ui_Ticket_Dialog
 
 
 class TicketDialog(QDialog):
