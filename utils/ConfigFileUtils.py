@@ -9,6 +9,7 @@ class ConfigFileUtils(object):
         names = conf.options(sort_name)
         return names
 
+
     @staticmethod
     def add_item_into_sorts(item_name, sort_name):
         conf = ConfigParser()

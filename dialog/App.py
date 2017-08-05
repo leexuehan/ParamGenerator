@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from dialog.CoalDialog import CoalDialog
 from dialog.calendarDialog import CalendarDialog
-from dialog.ticketDialog import TicketDialog
-from ui.app import Ui_MainWindow
+from dialog.TicketDialog import TicketDialog
+from ui.main_window import Ui_MainWindow
 from utils.ConfigFileUtils import ConfigFileUtils
 from utils.SqlUtils import SqlUtils
 
@@ -22,9 +23,9 @@ class MainWindow(QMainWindow):
 
         # init comboBox
         self.coal_sorts = []
-        self.load_coal_sorts()
+        self.load_coal_sorts_from_db()
         self.ticket_sorts = []
-        self.load_ticket_sorts()
+        self.load_ticket_sorts_from_db()
 
         # init param table
         # self.excelOps = ExcelOps()
@@ -37,15 +38,18 @@ class MainWindow(QMainWindow):
         self.price = None
         self.coal_sorts_selected = None
 
-    def load_coal_sorts(self):
+    def load_coal_sorts_from_db(self):
         self.ui.coal_sorts.clear()
-        coal_list = ConfigFileUtils.read_sort_list('coals')
+        coal_list = SqlUtils().query_all_tickets_name()
         for coal in coal_list:
-            self.coal_sorts.append(coal.strip())
+            self.coal_sorts.append(coal[0])
+        # coal_list = ConfigFileUtils.read_sort_list('coals')
+        # for coal in coal_list:
+        #     self.coal_sorts.append(coal.strip())
         self.ui.coal_sorts.addItems(self.coal_sorts)
         self.coal_sorts_selected = self.coal_sorts[0]
 
-    def load_ticket_sorts(self):
+    def load_ticket_sorts_from_db(self):
         self.ui.ticket_sorts.clear()
         ticket_list = ConfigFileUtils.read_sort_list('tickets')
         for ticket in ticket_list:
@@ -103,10 +107,15 @@ class MainWindow(QMainWindow):
         print('invoke edit')
         QMessageBox.information(self, 'invoke help', 'jj', QMessageBox.Yes)
 
-    def manage_ticket(self):
+    def on_add_new_ticket(self):
         ticketDialog = TicketDialog()
         ticketDialog.show()
         ticketDialog.exec_()
+
+    def on_add_new_coal(self):
+        coalDialog = CoalDialog()
+        coalDialog.show()
+        coalDialog.exec_()
 
     def on_date_selected(self):
         calendarDialog = CalendarDialog()

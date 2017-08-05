@@ -1,5 +1,4 @@
 import sqlite3
-import time
 
 
 class SqlUtils(object):
@@ -17,6 +16,9 @@ class SqlUtils(object):
                            % self.ticket_table_name
         print(create_table_sql)
         self.cursor.execute(create_table_sql)
+
+    def create_coal_table_if_necessary(self):
+        create_coal_table_sql = ''
 
     def create_record_by_car_detail_table_if_necessary(self):
         create_table_sql = 'CREATE TABLE if not exists %s ' \
@@ -47,10 +49,23 @@ class SqlUtils(object):
         self.cursor.execute(sql, record_by_car)
         self.tear_down()
 
-    def query_all_ticket_record(self):
-        sql = 'select * from tickets'
+    def query_all_tickets_name(self):
+        sql = 'select ticket_name from %s' % self.ticket_table_name
         self.cursor.execute(sql)
-        print(self.cursor.fetchall())
+        results = self.cursor.fetchall()
+        print(results, type(results))
+        self.tear_down()
+        return results
+
+    def query_all_coal_names(self):
+        sql = 'select ticket_name from %s' % self.ticket_table_name
+        print(sql)
+        self.cursor.execute(sql)
+        results = self.cursor.fetchall()
+        print(results, type(results))
+        self.tear_down()
+        return results
+
 
     def tear_down(self):
         self.conn.commit()
@@ -60,8 +75,8 @@ class SqlUtils(object):
 if __name__ == '__main__':
     sqlUtils = SqlUtils()
     # sqlUtils.delete_table('record_by_car_detail')
-    sqlUtils.add_record_by_car_detail('2017/08/05', 'fff', 'fff', '面煤', '2.00', '北线')
-    # sqlUtils.query_all_ticket_record()
+    # sqlUtils.add_record_by_car_detail('2017/08/05', 'fff', 'fff', '面煤', '2.00', '北线')
+    sqlUtils.query_all_tickets_name()
     # date = time.strftime('%Y/%m/%d', time.localtime(time.time()))  # 当前时间
     # print(date, type(date))
     # sqlUtils.delete_table('tickets')

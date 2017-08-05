@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>60</y>
+     <y>110</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>60</y>
+     <y>110</y>
      <width>161</width>
      <height>21</height>
     </rect>
@@ -40,7 +40,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>110</y>
+     <y>150</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -49,13 +49,13 @@
     <string>输入票种进价</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="ticket_price_content">
+  <widget class="QTextEdit" name="ticket_purchase_price_content">
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>100</y>
+     <y>150</y>
      <width>71</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -89,7 +89,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>150</y>
+     <y>190</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -98,13 +98,13 @@
     <string>输入票种售价</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="ticket_price_content_2">
+  <widget class="QTextEdit" name="ticket_sell_price_content">
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>140</y>
+     <y>190</y>
      <width>71</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -112,7 +112,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>110</y>
+     <y>150</y>
      <width>81</width>
      <height>16</height>
     </rect>
@@ -121,11 +121,11 @@
     <string>选择计价方式</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="purchase_compute_way">
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>110</y>
+     <y>150</y>
      <width>69</width>
      <height>22</height>
     </rect>
@@ -135,7 +135,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>150</y>
+     <y>190</y>
      <width>81</width>
      <height>16</height>
     </rect>
@@ -144,14 +144,37 @@
     <string>选择计价方式</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_2">
+  <widget class="QComboBox" name="sell_compute_way">
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>150</y>
+     <y>190</y>
      <width>69</width>
      <height>22</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="date_value_display">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>70</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="select_date_btn">
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>70</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选择添加日期</string>
    </property>
   </widget>
  </widget>
@@ -189,9 +212,60 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>purchase_compute_way</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Ticket_Dialog</receiver>
+   <slot>on_purchase_price_compute_way_selected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>444</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sell_compute_way</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Ticket_Dialog</receiver>
+   <slot>on_sell_price_compute_way_selected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>452</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>select_date_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Ticket_Dialog</receiver>
+   <slot>on_ticket_add_date_selected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>148</x>
+     <y>43</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>on_new_coal_added()</signal>
   <slot>on_ok()</slot>
+  <slot>on_purchase_price_compute_way_selected()</slot>
+  <slot>on_sell_price_compute_way_selected()</slot>
+  <slot>on_ticket_add_date_selected()</slot>
  </slots>
 </ui>
