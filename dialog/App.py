@@ -84,22 +84,6 @@ class MainWindow(QMainWindow):
                                             self.weight_value, self.ticket_selected)
         QMessageBox.information(self, 'add finished', '添加成功!此次添加的内容已经导出到本地备份文件中', QMessageBox.Yes)
 
-    def verifyInput(self):
-        if self.coal_sorts_selected == None:
-            QMessageBox.information(self, 'add finished', '没有选择种类', QMessageBox.Yes)
-            return False
-        elif self.beginDate == None:
-            QMessageBox.information(self, 'add finished', '没有选择起始日期', QMessageBox.Yes)
-            return False
-        elif self.endDate == None:
-            QMessageBox.information(self, 'add finished', '没有选择截止日期', QMessageBox.Yes)
-            return False
-        elif self.price == None:
-            QMessageBox.information(self, 'add finished', '没有输入单价', QMessageBox.Yes)
-            return False
-        else:
-            return True
-
     def invokeHelp(self):
         QMessageBox.information(self, 'invoke help', '帮助内容', QMessageBox.Yes)
 
