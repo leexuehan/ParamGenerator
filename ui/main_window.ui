@@ -206,7 +206,7 @@
    </property>
    <widget class="QMenu" name="menuhelp">
     <property name="title">
-     <string>出账</string>
+     <string>账单</string>
     </property>
     <addaction name="compute_by_person"/>
     <addaction name="compute_by_coal"/>
@@ -300,7 +300,7 @@
   </action>
   <action name="compute_by_person">
    <property name="text">
-    <string>计算方式</string>
+    <string>出账</string>
    </property>
   </action>
   <action name="compute_by_coal">
