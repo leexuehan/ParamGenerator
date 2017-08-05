@@ -2,6 +2,8 @@
 from dialog.calendarDialog import CalendarDialog
 from dialog.ticketDialog import TicketDialog
 from ui.app import Ui_MainWindow
+from utils.ConfigFileUtils import ConfigFileUtils
+from utils.SqlUtils import SqlUtils
 
 __author__ = 'leexuehan@github.com'
 
@@ -10,25 +12,13 @@ import time
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 
-from utils.excelOps import ExcelOps
-
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        # init param table
-        self.excelOps = ExcelOps()
-        self.excelOps.generate_param_table()
-
         # init ui
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        # init input
-        self.beginDate = None
-        self.endDate = None
-        self.price = None
-        self.coalSortsSelected = None
 
         # init comboBox
         self.coal_sorts = []
@@ -36,52 +26,62 @@ class MainWindow(QMainWindow):
         self.ticket_sorts = []
         self.load_ticket_sorts()
 
+        # init param table
+        # self.excelOps = ExcelOps()
+        # self.excelOps.generate_param_table()
+
+        # init input
+        self.select_date = None
+        self.beginDate = None
+        self.endDate = None
+        self.price = None
+        self.coal_sorts_selected = None
+
     def load_coal_sorts(self):
         self.ui.coal_sorts.clear()
-        with open('sortlist.txt', 'r', encoding='utf-8') as file:
-            for line in file:
-                self.coal_sorts.append(line.strip())
-            self.ui.coal_sorts.addItems(self.coal_sorts)
-        self.coalSortsSelected = self.coal_sorts[0]
+        coal_list = ConfigFileUtils.read_sort_list('coals')
+        for coal in coal_list:
+            self.coal_sorts.append(coal.strip())
+        self.ui.coal_sorts.addItems(self.coal_sorts)
+        self.coal_sorts_selected = self.coal_sorts[0]
 
     def load_ticket_sorts(self):
         self.ui.ticket_sorts.clear()
-        with open('ticketlist.txt', 'r', encoding='utf-8') as file:
-            for line in file:
-                self.ticket_sorts.append(line.strip())
-            self.ui.ticket_sorts.addItems(self.ticket_sorts)
+        ticket_list = ConfigFileUtils.read_sort_list('tickets')
+        for ticket in ticket_list:
+            self.ticket_sorts.append(ticket.strip())
+        self.ui.ticket_sorts.addItems(self.ticket_sorts)
 
     def onCoalSortSelected(self, item):
         # 获得条目
         coalSorts = self.coal_sorts[item]
-        self.coalSortsSelected = coalSorts
+        self.coal_sorts_selected = coalSorts
 
-    def getPrice(self):
-        # 获得单价
-        pass
+    def on_ticket_selected(self, item):
+        ticket_name = self.ticket_sorts[item]
+        self.ticket_selected = ticket_name
 
     def exportTable(self, beginDate, endDate, price):
         # 导出每一次添加
         with open('添加备份.txt', 'a') as file:
             addtime = time.strftime('%Y-%m-%d-%H:%M', time.localtime(time.time()))
             content = str(self.beginDate) + '~' + str(
-                self.endDate) + ',' + self.coalSortsSelected + ',' + self.price + '\n'
+                self.endDate) + ',' + self.coal_sorts_selected + ',' + self.price + '\n'
             file.write(str(addtime) + '添加了:' + content)
 
-    def onAddFinished(self):
+    # 添加记录“逐车明细”
+    def on_record_add(self):
+        print("ready to add record!!!!!!!!!!!111")
         # 校验输入是否完整
+        # 数据库存一份，excel 存一份
+        print(self.select_date, type(self.select_date))
+        SqlUtils().add_record_by_car_detail(self.select_date, self.person_name, self.car_id,
+                                            self.coal_sorts_selected,
+                                            self.weight_value, self.ticket_selected)
         QMessageBox.information(self, 'add finished', '添加成功!此次添加的内容已经导出到本地备份文件中', QMessageBox.Yes)
 
-    def beginDate(self):
-        print(self.ui.startCalender.selectedDate().toPyDate())
-        self.beginDate = str(self.ui.startCalender.selectedDate().toPyDate())
-
-    def endDate(self):
-        print(self.ui.endCalender.selectedDate().toPyDate())
-        self.endDate = str(self.ui.endCalender.selectedDate().toPyDate())
-
     def verifyInput(self):
-        if self.coalSortsSelected == None:
+        if self.coal_sorts_selected == None:
             QMessageBox.information(self, 'add finished', '没有选择种类', QMessageBox.Yes)
             return False
         elif self.beginDate == None:
@@ -115,17 +115,20 @@ class MainWindow(QMainWindow):
             date = calendarDialog.date_time
             print("value get from calendar window is:" + date.strftime('%Y/%m/%d'))
             self.ui.date_value_display.setPlainText(date.strftime('%Y/%m/%d'))
+            self.select_date = date.strftime('%Y/%m/%d')
         calendarDialog.destroy()
 
     def on_name_input(self):
         print("input name is", self.ui.usernmae_content.text())
+        self.person_name = self.ui.usernmae_content.text()
 
     def on_input_car_id(self):
         print("input car id is", self.ui.car_id_content.text())
+        self.car_id = self.ui.car_id_content.text()
 
     def on_weight_value_input(self):
         print("input weight value is", self.ui.weight_value.text())
-        print("input weight value2 is", self.ui.weight_value_2.text())
+        self.weight_value = self.ui.weight_value.text()
 
     def exit(self):
         sys.exit(0)

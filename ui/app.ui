@@ -53,7 +53,7 @@
      <string>煤种</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="finishButton">
+   <widget class="QPushButton" name="add_record_btn">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -174,20 +174,10 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="weight_value">
+   <widget class="QDoubleSpinBox" name="weight_value">
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>270</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="weight_value_2">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
       <y>270</y>
       <width>62</width>
       <height>22</height>
@@ -386,10 +376,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>finishButton</sender>
+   <sender>add_record_btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>onAddFinished()</slot>
+   <slot>on_record_add()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>402</x>
@@ -472,44 +462,28 @@
    <slot>on_weight_value_input()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>324</x>
-     <y>303</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>232</x>
-     <y>439</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>finishButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onAddFinished()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>356</x>
-     <y>388</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>430</x>
-     <y>476</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>weight_value_2</sender>
-   <signal>editingFinished()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>on_weight_value_input()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>473</x>
+     <x>323</x>
      <y>310</y>
     </hint>
     <hint type="destinationlabel">
      <x>513</x>
      <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ticket_sorts</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_ticket_selected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>314</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>136</x>
+     <y>354</y>
     </hint>
    </hints>
   </connection>
@@ -523,7 +497,7 @@
   <slot>beginDate()</slot>
   <slot>endDate()</slot>
   <slot>getPrice()</slot>
-  <slot>onAddFinished()</slot>
+  <slot>on_record_add()</slot>
   <slot>on_input_car_id()</slot>
   <slot>invokeHelp()</slot>
   <slot>invokeEdit()</slot>
@@ -531,6 +505,6 @@
   <slot>on_date_selected()</slot>
   <slot>on_name_input()</slot>
   <slot>on_weight_value_input()</slot>
-  <slot>slot1()</slot>
+  <slot>on_ticket_selected()</slot>
  </slots>
 </ui>
