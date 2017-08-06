@@ -57,14 +57,16 @@ class CoalDialog(QDialog):
         logging.info("进价计费方式:" + self.purchase_price_compute_way_selected)
         logging.info("售价:" + coal_sell_price)
         logging.info("售价计费方式:" + self.sell_price_compute_way_selected)
-        utils = SqlUtils()
-        coal_name_set = utils.query_all_coal_names()
+        handler = self.main_window_handler
+        coal_name_set = handler.coal_sorts
         if coal_name in coal_name_set:
             QMessageBox.information(self, 'already add', '您已经添加过该煤种', QMessageBox.Yes)
         else:
+            utils = SqlUtils()
             utils.add_coal_record(str(self.coal_add_date), coal_name, coal_purchase_price,
                                   self.purchase_price_compute_way_selected, coal_sell_price,
                                   self.sell_price_compute_way_selected)
-            self.main_window_handler.load_coal_sorts_from_db()
+            handler.coal_sorts.append(coal_name)
+            handler.refresh_coal_sorts_combox()
             QMessageBox.information(self, 'add success', '添加煤种成功', QMessageBox.Yes)
         self.accept()

@@ -26,9 +26,9 @@ class MainWindow(QMainWindow):
 
         # init comboBox
         self.coal_sorts = []
-        self.load_coal_sorts_from_db()
+        self.init_coal_sorts_from_db()
         self.ticket_sorts = []
-        self.load_ticket_sorts_from_db()
+        self.init_ticket_sorts_from_db()
 
         # init param table
         # self.excelOps = ExcelOps()
@@ -41,7 +41,14 @@ class MainWindow(QMainWindow):
         self.price = None
         self.coal_sorts_selected = None
 
-    def load_coal_sorts_from_db(self):
+    def test_cursor_1(self):
+        print("!!!!!!!!!!!!!!!!!!!!11")
+
+    def refresh_coal_sorts_combox(self):
+        self.ui.coal_sorts.clear()
+        self.ui.coal_sorts.addItems(self.coal_sorts)
+
+    def init_coal_sorts_from_db(self):
         self.ui.coal_sorts.clear()
         utils = SqlUtils()
         try:
@@ -53,7 +60,11 @@ class MainWindow(QMainWindow):
             self.coal_sorts.append(coal[0])
         self.ui.coal_sorts.addItems(self.coal_sorts)
 
-    def load_ticket_sorts_from_db(self):
+    def refresh_ticket_sorts_combox(self):
+        self.ui.ticket_sorts.clear()
+        self.ui.ticket_sorts.addItems(self.ticket_sorts)
+
+    def init_ticket_sorts_from_db(self):
         self.ui.ticket_sorts.clear()
         utils = SqlUtils()
         try:
@@ -90,7 +101,7 @@ class MainWindow(QMainWindow):
         if calendarDialog.exec_():
             date = calendarDialog.date_time
             print("value get from calendar window is:" + date.strftime('%Y/%m/%d'))
-            self.ui.date_value_display.setPlainText(date.strftime('%Y/%m/%d'))
+            self.ui.date_value_content.setText(date.strftime('%Y/%m/%d'))
             self.select_date = date.strftime('%Y/%m/%d')
         calendarDialog.destroy()
 

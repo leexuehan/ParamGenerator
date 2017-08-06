@@ -52,15 +52,17 @@ class TicketDialog(QDialog):
         print("add new ticket info (添加日期，票名，进价，进价计费方式，售价，售价计费方式):",
               (self.ticket_add_date, ticket_name, ticket_purchase_price, self.purchase_price_compute_way_selected
                , ticket_sell_price, self.sell_price_compute_way_selected))
-        utils = SqlUtils()
-        ticket_name_set = utils.query_all_tickets_name()
+        handler = self.main_window_handler
+        ticket_name_set = handler.ticket_sorts
         # todo 检验输入是否缺少
         if ticket_name in ticket_name_set:
             QMessageBox.information(self, 'already add', '您已经添加过该票种', QMessageBox.Yes)
         else:
+            utils = SqlUtils()
             utils.add_ticket_record(self.ticket_add_date, ticket_name, ticket_purchase_price,
                                     self.purchase_price_compute_way_selected, ticket_sell_price,
                                     self.sell_price_compute_way_selected)
-            self.main_window_handler.load_ticket_sorts_from_db()
+            handler.ticket_sorts.append(ticket_name)
+            handler.refresh_ticket_sorts_combox()
             QMessageBox.information(self, 'add success', '添加票种成功', QMessageBox.Yes)
         self.accept()

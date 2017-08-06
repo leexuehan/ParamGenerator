@@ -54,7 +54,7 @@ class SqlUtils(object):
         sql = 'DROP TABLE ' + table_name
         cursor.execute(sql)
 
-    def add_ticket_record(self,add_date, ticket_name, purchase_compute_way, purchase_price,
+    def add_ticket_record(self, add_date, ticket_name, purchase_compute_way, purchase_price,
                           sell_compute_way, sell_price):
         conn = self.get_connection()
         cursor = conn.cursor()
@@ -66,7 +66,7 @@ class SqlUtils(object):
         conn.close()
         # 原子性???
 
-    def add_coal_record(self,add_date, coal_name, purchase_compute_way, purchase_price,
+    def add_coal_record(self, add_date, coal_name, purchase_compute_way, purchase_price,
                         sell_compute_way, sell_price):
         conn = self.get_connection()
         cursor = conn.cursor()
@@ -79,13 +79,13 @@ class SqlUtils(object):
 
         # 原子性???
 
-    def add_record_by_car_detail(self, cursor, date, person_name, car_id, coal_name, weight_value, ticket_name):
+    def add_record_by_car_detail(self, date, person_name, car_id, coal_name, weight_value, ticket_name):
         conn = self.get_connection()
         cursor = conn.cursor()
         record_by_car = (date, person_name, car_id, coal_name, weight_value, ticket_name)
         logging.info("record info is ", record_by_car)
         sql = 'INSERT INTO %s VALUES(?,?,?,?,?,?)' % self.record_by_car_table_name
-        logging.info("execute sql:", sql)
+        logging.info("execute sql:" + sql)
         cursor.execute(sql, record_by_car)
         conn.commit()
         conn.close()
@@ -111,6 +111,7 @@ class SqlUtils(object):
         logging.info(results)
         conn.close()
         return results
+
 
 if __name__ == '__main__':
     sqlUtils = SqlUtils()

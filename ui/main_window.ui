@@ -144,16 +144,6 @@
      <string>选择日期</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="date_value_display">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>20</y>
-      <width>151</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="usernmae_content">
     <property name="geometry">
      <rect>
@@ -187,11 +177,44 @@
    <widget class="QPlainTextEdit" name="ticket_price_display">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>320</x>
       <y>200</y>
       <width>151</width>
       <height>21</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="date_value_content">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>20</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="coal_sort_sell_price">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>130</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_coal_2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>130</y>
+      <width>59</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>销售单价</string>
     </property>
    </widget>
   </widget>

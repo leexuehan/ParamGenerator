@@ -1,3 +1,4 @@
-2017-08-06 15:26:39,820 - TimerUtils.py[line:12] - INFO: this is a log test
-2017-08-06 15:26:39,820 - TimerUtils.py[line:13] - WARNING: this is a awrnm test
-2017-08-06 15:26:39,820 - VerifyUtils.py[line:6] - INFO: in verify utils.........
+2017-08-06 22:07:14,884 - SqlUtils.py[line:108] - INFO: execute sql:SELECT COAL_NAME FROM coals
+2017-08-06 22:07:14,885 - SqlUtils.py[line:111] - INFO: [('tatataatat',), ('你不饿',), ('你的',), ('佳美',), ('戏中',), ('戏中二孩',), ('我饿',), ('西中',), ('面煤',)]
+2017-08-06 22:07:14,887 - SqlUtils.py[line:97] - INFO: execute sql:SELECT TICKET_NAME FROM tickets
+2017-08-06 22:07:14,887 - SqlUtils.py[line:100] - INFO: [('example1',), ('我我',), ('大票',), ('小票',), ('kkk',), ('中国',), ('黑哥们',), ('名称',)]

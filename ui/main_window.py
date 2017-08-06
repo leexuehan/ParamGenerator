@@ -46,9 +46,6 @@ class Ui_MainWindow(object):
         self.select_date_btn = QtWidgets.QPushButton(self.centralwidget)
         self.select_date_btn.setGeometry(QtCore.QRect(20, 20, 75, 23))
         self.select_date_btn.setObjectName("select_date_btn")
-        self.date_value_display = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.date_value_display.setGeometry(QtCore.QRect(110, 20, 151, 21))
-        self.date_value_display.setObjectName("date_value_display")
         self.usernmae_content = QtWidgets.QLineEdit(self.centralwidget)
         self.usernmae_content.setGeometry(QtCore.QRect(110, 60, 151, 20))
         self.usernmae_content.setObjectName("usernmae_content")
@@ -61,6 +58,9 @@ class Ui_MainWindow(object):
         self.ticket_price_display = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.ticket_price_display.setGeometry(QtCore.QRect(260, 200, 151, 21))
         self.ticket_price_display.setObjectName("ticket_price_display")
+        self.date_value_content = QtWidgets.QLineEdit(self.centralwidget)
+        self.date_value_content.setGeometry(QtCore.QRect(110, 20, 151, 20))
+        self.date_value_content.setObjectName("date_value_content")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1343, 23))
@@ -139,6 +139,7 @@ class Ui_MainWindow(object):
         self.ticket_sorts.currentIndexChanged['int'].connect(MainWindow.on_ticket_selected)
         self.add_new_coal.triggered.connect(MainWindow.on_add_new_coal)
         self.compute_account.triggered.connect(MainWindow.on_compute_account)
+        self.date_value_content.selectionChanged.connect(MainWindow.on_date_selected)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
