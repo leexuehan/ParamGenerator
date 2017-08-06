@@ -59,7 +59,7 @@ class Ui_Coal_Dialog(object):
         self.purchase_compute_way.currentIndexChanged['int'].connect(Coal_Dialog.on_purchase_compute_way_selected)
         self.sell_compute_way.currentIndexChanged['int'].connect(Coal_Dialog.on_sell_compute_way_selected)
         self.select_date_btn.clicked.connect(Coal_Dialog.on_add_new_coal_date_selected)
-        self.confirm.clicked.connect(Coal_Dialog.on_add_new_coal_finished)
+        self.confirm.clicked.connect(Coal_Dialog.add_new_coal)
         self.cancel.clicked.connect(Coal_Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Coal_Dialog)
 

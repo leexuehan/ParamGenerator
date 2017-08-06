@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from dialog.AccountDialog import AccountDialog
 from dialog.CoalDialog import CoalDialog
-from dialog.calendarDialog import CalendarDialog
 from dialog.TicketDialog import TicketDialog
+from dialog.calendarDialog import CalendarDialog
 from ui.main_window import Ui_MainWindow
-from utils.ConfigFileUtils import ConfigFileUtils
+from utils.LogUtils import LogUtils
 from utils.SqlUtils import SqlUtils
 
 __author__ = 'leexuehan@github.com'
@@ -41,23 +43,26 @@ class MainWindow(QMainWindow):
 
     def load_coal_sorts_from_db(self):
         self.ui.coal_sorts.clear()
-        coal_list = SqlUtils().query_all_coal_names()
+        utils = SqlUtils()
+        try:
+            coal_list = utils.query_all_coal_names()
+        except:
+            logging.warning("there is no coal in db")
+            coal_list = []
         for coal in coal_list:
             self.coal_sorts.append(coal[0])
-        # coal_list = ConfigFileUtils.read_sort_list('coals')
-        # for coal in coal_list:
-        #     self.coal_sorts.append(coal.strip())
         self.ui.coal_sorts.addItems(self.coal_sorts)
-        # self.coal_sorts_selected = self.coal_sorts[0]
 
     def load_ticket_sorts_from_db(self):
         self.ui.ticket_sorts.clear()
-        ticket_list = SqlUtils().query_all_tickets_name()
+        utils = SqlUtils()
+        try:
+            ticket_list = utils.query_all_tickets_name()
+        except:
+            logging.warning("there is no ticket sort in db")
+            ticket_list = []
         for ticket in ticket_list:
             self.ticket_sorts.append(ticket[0])
-        # ticket_list = ConfigFileUtils.read_sort_list('tickets')
-        # for ticket in ticket_list:
-        #     self.ticket_sorts.append(ticket.strip())
         self.ui.ticket_sorts.addItems(self.ticket_sorts)
 
     def onCoalSortSelected(self, item):
@@ -71,14 +76,13 @@ class MainWindow(QMainWindow):
 
     # 添加记录“逐车明细”
     def on_record_add(self):
-        print("ready to add record!!!!!!!!!!!111")
+        logging.info("ready to add record to db")
         # 校验输入是否完整
         # 数据库存一份，excel 存一份
-        print(self.select_date, type(self.select_date))
         SqlUtils().add_record_by_car_detail(self.select_date, self.person_name, self.car_id,
                                             self.coal_sorts_selected,
                                             self.weight_value, self.ticket_selected)
-        QMessageBox.information(self, 'add finished', '添加成功!此次添加的内容已经导出到本地备份文件中', QMessageBox.Yes)
+        QMessageBox.information(self, 'add finished', '添加成功!', QMessageBox.Yes)
 
     def on_date_selected(self):
         calendarDialog = CalendarDialog()
@@ -116,11 +120,13 @@ class MainWindow(QMainWindow):
 
     def on_add_new_ticket(self):
         ticketDialog = TicketDialog()
+        ticketDialog.set_main_window_handler(self)
         ticketDialog.show()
         ticketDialog.exec_()
 
     def on_add_new_coal(self):
         coalDialog = CoalDialog()
+        coalDialog.set_main_window_handler(self)
         coalDialog.show()
         coalDialog.exec_()
 
@@ -134,6 +140,7 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
+    LogUtils.init_logger()
     app = QApplication(sys.argv)
     mainWindow = MainWindow()
     mainWindow.show()

@@ -1,8 +1,12 @@
-from PyQt5.QtWidgets import QDialog
+# -*- coding: utf-8 -*-
+
+import logging
+
+from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from dialog.calendarDialog import CalendarDialog
 from ui.coal import Ui_Coal_Dialog
-from utils.ConfigFileUtils import ConfigFileUtils
+from utils.SqlUtils import SqlUtils
 
 
 class CoalDialog(QDialog):
@@ -15,12 +19,13 @@ class CoalDialog(QDialog):
         # init compute ways
         self.load_compute_ways()
 
+    # 用此句柄来通知主界面相关内容更新
+    def set_main_window_handler(self, main_window_handler):
+        self.main_window_handler = main_window_handler
+
     def load_compute_ways(self):
         self.ui.purchase_compute_way.clear()
-        self.compute_ways = []
-        ways = ConfigFileUtils.read_sort_list('compute_ways')
-        for way in ways:
-            self.compute_ways.append(way.strip())
+        self.compute_ways = ['元/吨', '元/车']
         self.ui.purchase_compute_way.addItems(self.compute_ways)
         self.ui.sell_compute_way.addItems(self.compute_ways)
 
@@ -42,14 +47,24 @@ class CoalDialog(QDialog):
             self.coal_add_date = date.strftime('%Y/%m/%d')
         calendarDialog.destroy()
 
-    def on_add_new_coal_finished(self):
+    def add_new_coal(self):
         coal_name = self.ui.coal_name_content.toPlainText()
         coal_purchase_price = self.ui.coal_purchase_price_content.toPlainText()
         coal_sell_price = self.ui.coal_sell_price_content.toPlainText()
-        print("add new ticket info (添加日期，煤种名称，进价，进价计费方式，售价，售价计费方式):",
-              (self.coal_add_date, coal_name, coal_purchase_price, self.purchase_price_compute_way_selected
-               , coal_sell_price, self.sell_price_compute_way_selected))
-        # SqlUtils().add_ticket_record(self.ticket_add_date, ticket_name, ticket_purchase_price,
-        #                              self.purchase_price_compute_way_selected, ticket_sell_price,
-        #                              self.sell_price_compute_way_selected)
+        logging.info("添加日期:" + str(self.coal_add_date))
+        logging.info("煤种名称:" + coal_name)
+        logging.info("进价:" + coal_purchase_price)
+        logging.info("进价计费方式:" + self.purchase_price_compute_way_selected)
+        logging.info("售价:" + coal_sell_price)
+        logging.info("售价计费方式:" + self.sell_price_compute_way_selected)
+        utils = SqlUtils()
+        coal_name_set = utils.query_all_coal_names()
+        if coal_name in coal_name_set:
+            QMessageBox.information(self, 'already add', '您已经添加过该煤种', QMessageBox.Yes)
+        else:
+            utils.add_coal_record(str(self.coal_add_date), coal_name, coal_purchase_price,
+                                  self.purchase_price_compute_way_selected, coal_sell_price,
+                                  self.sell_price_compute_way_selected)
+            self.main_window_handler.load_coal_sorts_from_db()
+            QMessageBox.information(self, 'add success', '添加煤种成功', QMessageBox.Yes)
         self.accept()

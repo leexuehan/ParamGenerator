@@ -232,7 +232,7 @@
    <sender>confirm</sender>
    <signal>clicked()</signal>
    <receiver>Coal_Dialog</receiver>
-   <slot>on_add_new_coal_finished()</slot>
+   <slot>add_new_coal()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>305</x>
@@ -265,6 +265,6 @@
   <slot>on_purchase_compute_way_selected()</slot>
   <slot>on_sell_compute_way_selected()</slot>
   <slot>on_add_new_coal_date_selected()</slot>
-  <slot>on_add_new_coal_finished()</slot>
+  <slot>add_new_coal()</slot>
  </slots>
 </ui>
