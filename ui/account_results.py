@@ -29,6 +29,9 @@ class Ui_Account_Dialog(object):
         self.listView = QtWidgets.QListView(self.ff)
         self.listView.setGeometry(QtCore.QRect(300, 0, 256, 261))
         self.listView.setObjectName("listView")
+        self.pushButton = QtWidgets.QPushButton(self.ff)
+        self.pushButton.setGeometry(QtCore.QRect(50, 110, 131, 21))
+        self.pushButton.setObjectName("pushButton")
         self.account.addTab(self.ff, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -90,6 +93,8 @@ class Ui_Account_Dialog(object):
         self.compute_cmd_btn.clicked.connect(Account_Dialog.on_start_compute_cmd)
         self.select_start_date_btn.clicked.connect(Account_Dialog.on_select_begin_date)
         self.select_end_date_btn.clicked.connect(Account_Dialog.on_select_end_date)
+        self.listView.clicked['QModelIndex'].connect(Account_Dialog.on_person_name_from_list_view_selected)
+        self.pushButton.clicked.connect(Account_Dialog.delete_person_name_from_list_view)
         QtCore.QMetaObject.connectSlotsByName(Account_Dialog)
 
     def retranslateUi(self, Account_Dialog):
@@ -97,6 +102,7 @@ class Ui_Account_Dialog(object):
         Account_Dialog.setWindowTitle(_translate("Account_Dialog", "Dialog"))
         self.label_4.setText(_translate("Account_Dialog", "选择客户名称"))
         self.add_people.setText(_translate("Account_Dialog", "添加"))
+        self.pushButton.setText(_translate("Account_Dialog", "删除"))
         self.account.setTabText(self.account.indexOf(self.ff), _translate("Account_Dialog", "按人计算"))
         self.tab_3.setWhatsThis(_translate("Account_Dialog", "<html><head/><body><p>ccc</p></body></html>"))
         self.label_5.setText(_translate("Account_Dialog", "选择车牌号"))

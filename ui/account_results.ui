@@ -75,6 +75,19 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>110</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>删除</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
     <property name="whatsThis">
@@ -350,6 +363,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>listView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>on_person_name_from_list_view_selected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>669</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>delete_person_name_from_list_view()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_person_name_select_finished()</slot>
@@ -357,5 +402,7 @@
   <slot>on_select_end_date()</slot>
   <slot>on_start_compute_cmd()</slot>
   <slot>on_add_person()</slot>
+  <slot>on_person_name_from_list_view_selected()</slot>
+  <slot>delete_person_name_from_list_view()</slot>
  </slots>
 </ui>
