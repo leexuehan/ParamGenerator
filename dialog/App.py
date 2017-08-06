@@ -41,20 +41,23 @@ class MainWindow(QMainWindow):
 
     def load_coal_sorts_from_db(self):
         self.ui.coal_sorts.clear()
-        coal_list = SqlUtils().query_all_tickets_name()
+        coal_list = SqlUtils().query_all_coal_names()
         for coal in coal_list:
             self.coal_sorts.append(coal[0])
         # coal_list = ConfigFileUtils.read_sort_list('coals')
         # for coal in coal_list:
         #     self.coal_sorts.append(coal.strip())
         self.ui.coal_sorts.addItems(self.coal_sorts)
-        self.coal_sorts_selected = self.coal_sorts[0]
+        # self.coal_sorts_selected = self.coal_sorts[0]
 
     def load_ticket_sorts_from_db(self):
         self.ui.ticket_sorts.clear()
-        ticket_list = ConfigFileUtils.read_sort_list('tickets')
+        ticket_list = SqlUtils().query_all_tickets_name()
         for ticket in ticket_list:
-            self.ticket_sorts.append(ticket.strip())
+            self.ticket_sorts.append(ticket[0])
+        # ticket_list = ConfigFileUtils.read_sort_list('tickets')
+        # for ticket in ticket_list:
+        #     self.ticket_sorts.append(ticket.strip())
         self.ui.ticket_sorts.addItems(self.ticket_sorts)
 
     def onCoalSortSelected(self, item):
@@ -110,10 +113,6 @@ class MainWindow(QMainWindow):
 
     def invokeHelp(self):
         QMessageBox.information(self, 'invoke help', '帮助内容', QMessageBox.Yes)
-
-    def invokeEdit(self):
-        print('invoke edit')
-        QMessageBox.information(self, 'invoke help', 'jj', QMessageBox.Yes)
 
     def on_add_new_ticket(self):
         ticketDialog = TicketDialog()

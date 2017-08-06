@@ -92,10 +92,14 @@ class SqlUtils(object):
         ops = self.pre_ops()
         conn = ops[0]
         cursor = ops[1]
-        sql = 'select ticket_name from %s' % self.ticket_table_name
+        sql = 'select coal_name from %s' % self.coal_table_name
         print("execute sql:", sql)
-        cursor.execute(sql)
-        results = cursor.fetchall()
+        try:
+            cursor.execute(sql)
+            results = cursor.fetchall()
+        except:
+            print("query info from sql failed")
+            results = []
         print(results, type(results))
         self.post_ops(conn)
         return results
