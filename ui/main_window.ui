@@ -204,12 +204,12 @@
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuhelp">
+   <widget class="QMenu" name="menu_acount">
     <property name="title">
      <string>账单</string>
     </property>
-    <addaction name="compute_by_person"/>
-    <addaction name="compute_by_coal"/>
+    <addaction name="compute_account"/>
+    <addaction name="history_acount"/>
    </widget>
    <widget class="QMenu" name="coal">
     <property name="title">
@@ -257,7 +257,7 @@
    </widget>
    <addaction name="coal"/>
    <addaction name="ticket"/>
-   <addaction name="menuhelp"/>
+   <addaction name="menu_acount"/>
    <addaction name="menu_4"/>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
@@ -298,12 +298,12 @@
     <string>添加煤种</string>
    </property>
   </action>
-  <action name="compute_by_person">
+  <action name="compute_account">
    <property name="text">
     <string>出账</string>
    </property>
   </action>
-  <action name="compute_by_coal">
+  <action name="history_acount">
    <property name="text">
     <string>历史账单</string>
    </property>
@@ -502,6 +502,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>compute_account</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_compute_account()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>671</x>
+     <y>365</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>signal1()</signal>
@@ -522,5 +538,6 @@
   <slot>on_weight_value_input()</slot>
   <slot>on_ticket_selected()</slot>
   <slot>on_add_new_coal()</slot>
+  <slot>on_compute_account()</slot>
  </slots>
 </ui>

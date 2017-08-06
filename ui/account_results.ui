@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Account_Dialog</class>
+ <widget class="QDialog" name="Account_Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
+    <width>708</width>
     <height>692</height>
    </rect>
   </property>
@@ -16,122 +16,63 @@
   <widget class="QTabWidget" name="account">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>20</y>
-     <width>551</width>
-     <height>531</height>
+     <x>60</x>
+     <y>10</y>
+     <width>571</width>
+     <height>291</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="ff">
     <attribute name="title">
      <string>按人计算</string>
     </attribute>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>50</y>
+       <y>20</y>
        <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>输入客户名</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>50</y>
-       <width>113</width>
        <height>20</height>
       </rect>
      </property>
+     <property name="text">
+      <string>选择客户名称</string>
+     </property>
     </widget>
-    <widget class="QPushButton" name="select_date_btn">
+    <widget class="QComboBox" name="people_names">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>90</y>
-       <width>81</width>
+       <x>110</x>
+       <y>20</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="add_people">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>70</y>
+       <width>131</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>选择起始日期</string>
+      <string>添加</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="date_value_display">
+    <widget class="QListView" name="listView">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>90</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPlainTextEdit" name="date_value_display_2">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>140</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>140</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择截止日期</string>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>260</y>
+       <x>300</x>
+       <y>0</y>
        <width>256</width>
-       <height>192</height>
+       <height>261</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>220</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>开始计算</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>220</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
      </property>
     </widget>
    </widget>
@@ -142,108 +83,36 @@
     <attribute name="title">
      <string>按车计算</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>210</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>开始计算</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_3">
+    <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>130</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择截止日期</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_4">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>80</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择起始日期</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>40</y>
+       <y>30</y>
        <width>81</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>输入客户名</string>
+      <string>选择车牌号</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="date_value_display_3">
+    <widget class="QComboBox" name="comboBox_3">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>130</y>
-       <width>181</width>
-       <height>21</height>
+       <x>100</x>
+       <y>30</y>
+       <width>69</width>
+       <height>22</height>
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QTableView" name="tableView_2">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>40</y>
-       <width>113</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPlainTextEdit" name="date_value_display_4">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>80</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar_2">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>210</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>250</y>
+       <x>300</x>
+       <y>10</y>
        <width>256</width>
-       <height>192</height>
+       <height>301</height>
       </rect>
      </property>
     </widget>
@@ -252,50 +121,11 @@
     <attribute name="title">
      <string>按票计算</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>210</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>开始计算</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_5">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>130</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择截止日期</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_6">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>80</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择起始日期</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>40</y>
+       <x>20</x>
+       <y>20</y>
        <width>81</width>
        <height>16</height>
       </rect>
@@ -304,56 +134,23 @@
       <string>选择票种</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="date_value_display_5">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>130</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPlainTextEdit" name="date_value_display_6">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>80</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar_3">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>210</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_3">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>250</y>
-       <width>256</width>
-       <height>192</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QComboBox" name="comboBox">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>30</y>
+       <x>90</x>
+       <y>20</y>
        <width>69</width>
        <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTableView" name="tableView_3">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>10</y>
+       <width>256</width>
+       <height>192</height>
       </rect>
      </property>
     </widget>
@@ -362,99 +159,203 @@
     <attribute name="title">
      <string>按日期计算</string>
     </attribute>
-    <widget class="QPlainTextEdit" name="date_value_display_7">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>130</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_7">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>130</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择截止日期</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="select_date_btn_8">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>80</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择起始日期</string>
-     </property>
-    </widget>
-    <widget class="QPlainTextEdit" name="date_value_display_8">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>80</y>
-       <width>181</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>220</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>开始计算</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar_4">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>220</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_4">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>260</y>
-       <width>256</width>
-       <height>192</height>
-      </rect>
-     </property>
-    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string/>
+    </attribute>
    </widget>
   </widget>
-  <action name="actionff">
-   <property name="text">
-    <string>凤飞飞</string>
+  <widget class="QPushButton" name="return_to_main_window">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>620</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
    </property>
-  </action>
+   <property name="text">
+    <string>返回</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="output_result">
+   <property name="geometry">
+    <rect>
+     <x>355</x>
+     <y>310</y>
+     <width>281</width>
+     <height>261</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="compute_cmd_btn">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>540</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始计算</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="end_date">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>480</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="select_start_date_btn">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>430</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选择起始日期</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="select_end_date_btn">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>480</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选择截止日期</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="start_date">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>430</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>account</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>return_to_main_window</sender>
+   <signal>clicked()</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>525</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>482</x>
+     <y>652</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>people_names</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>on_person_name_select_finished()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>210</x>
+     <y>66</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>add_people</sender>
+   <signal>clicked()</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>on_add_person()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>276</x>
+     <y>396</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>compute_cmd_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>on_start_compute_cmd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>556</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>select_start_date_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>on_select_begin_date()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>27</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>select_end_date_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Account_Dialog</receiver>
+   <slot>on_select_end_date()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>549</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_person_name_select_finished()</slot>
+  <slot>on_select_begin_date()</slot>
+  <slot>on_select_end_date()</slot>
+  <slot>on_start_compute_cmd()</slot>
+  <slot>on_add_person()</slot>
+ </slots>
 </ui>

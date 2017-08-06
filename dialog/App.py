@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from dialog.AccountDialog import AccountDialog
 from dialog.CoalDialog import CoalDialog
 from dialog.calendarDialog import CalendarDialog
 from dialog.TicketDialog import TicketDialog
@@ -65,14 +66,6 @@ class MainWindow(QMainWindow):
         ticket_name = self.ticket_sorts[item]
         self.ticket_selected = ticket_name
 
-    def exportTable(self, beginDate, endDate, price):
-        # 导出每一次添加
-        with open('添加备份.txt', 'a') as file:
-            addtime = time.strftime('%Y-%m-%d-%H:%M', time.localtime(time.time()))
-            content = str(self.beginDate) + '~' + str(
-                self.endDate) + ',' + self.coal_sorts_selected + ',' + self.price + '\n'
-            file.write(str(addtime) + '添加了:' + content)
-
     # 添加记录“逐车明细”
     def on_record_add(self):
         print("ready to add record!!!!!!!!!!!111")
@@ -83,23 +76,6 @@ class MainWindow(QMainWindow):
                                             self.coal_sorts_selected,
                                             self.weight_value, self.ticket_selected)
         QMessageBox.information(self, 'add finished', '添加成功!此次添加的内容已经导出到本地备份文件中', QMessageBox.Yes)
-
-    def invokeHelp(self):
-        QMessageBox.information(self, 'invoke help', '帮助内容', QMessageBox.Yes)
-
-    def invokeEdit(self):
-        print('invoke edit')
-        QMessageBox.information(self, 'invoke help', 'jj', QMessageBox.Yes)
-
-    def on_add_new_ticket(self):
-        ticketDialog = TicketDialog()
-        ticketDialog.show()
-        ticketDialog.exec_()
-
-    def on_add_new_coal(self):
-        coalDialog = CoalDialog()
-        coalDialog.show()
-        coalDialog.exec_()
 
     def on_date_selected(self):
         calendarDialog = CalendarDialog()
@@ -125,6 +101,37 @@ class MainWindow(QMainWindow):
 
     def exit(self):
         sys.exit(0)
+
+    # menu actions below
+    def on_compute_account(self):
+        accountDialog = AccountDialog()
+        accountDialog.show()
+        accountDialog.exec_()
+
+    def invokeHelp(self):
+        QMessageBox.information(self, 'invoke help', '帮助内容', QMessageBox.Yes)
+
+    def invokeEdit(self):
+        print('invoke edit')
+        QMessageBox.information(self, 'invoke help', 'jj', QMessageBox.Yes)
+
+    def on_add_new_ticket(self):
+        ticketDialog = TicketDialog()
+        ticketDialog.show()
+        ticketDialog.exec_()
+
+    def on_add_new_coal(self):
+        coalDialog = CoalDialog()
+        coalDialog.show()
+        coalDialog.exec_()
+
+    def exportTable(self, beginDate, endDate, price):
+        # 导出每一次添加
+        with open('添加备份.txt', 'a') as file:
+            addtime = time.strftime('%Y-%m-%d-%H:%M', time.localtime(time.time()))
+            content = str(self.beginDate) + '~' + str(
+                self.endDate) + ',' + self.coal_sorts_selected + ',' + self.price + '\n'
+            file.write(str(addtime) + '添加了:' + content)
 
 
 if __name__ == '__main__':
